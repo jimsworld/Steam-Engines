@@ -1,51 +1,37 @@
-#  Steam Engines v0.01
+#  Steam Engines v0.02
 
 import pygame
 import random
 import math
 from global_time import GlobalTime
+from loco_steam import Loco_Steam
 
 # Initialize global time
 global_time = GlobalTime()
 
-class Loco_Steam:
-    def __init__(self, current_speed, top_speed, coal, water, steam, max_coal, max_water, max_steam):
-        self.on = False
-        self.current_speed = current_speed
-        self.top_speed = top_speed
-        self.coal = coal
-        self.water = water
-        self.steam = steam
-        self.max_coal = max_coal
-        self.max_water = max_water
-        self.max_steam = max_steam
+# Initialize steam locomotive
+loco_01 = Loco_Steam("Talyllyn", 0, 10, 0, 0, 0, 10, 10, 10)
 
-    def start_engine(self):
-        self.on = True
 
-    def stop_engine(self):
-        self.on = False
+show_menu = True
 
-    def enforce_non_negative(self):
-        self.coal = max(0, self.coal)
-        self.water = max(0, self.water)
-        self.steam = max(0, self.steam)
+while True:
 
-    def add_water(self, amount):
-        self.water += amount
-        if self.water > self.max_water:
-            self.water = self.max_water
-    
-    def add_coal(self, amount):
-        self.coal += amount
-        if self.coal > self.max_coal:
-            self.coal = self.max_coal
-    
-    def make_steam(self):
-        if self.on:
-            self.coal -= 1
-            self.water -= 1
-            self.steam += 1
-            self.enforce_non_negative()
-            if self.steam > self.max_steam:
-                self.steam = self.max_steam
+    # if show_instructions:
+    #     print("\nEnter command:"
+    #         "\n'help':    shows this menu"
+    #         "\n'0':"
+    #         "\n'1':"
+    #         "\n'2':"
+    #         "\n'3':"
+    #         "\n'quit':    exits.")
+    #     show_instructions = False  # Stops repetitive instructions
+
+    # user_input = input("Enter command: ")
+    # match user_input:
+
+    loco_01.start_engine()
+    loco_01.make_steam()
+    loco_01.accelerate()
+    print(loco_01.get_speed())
+    pygame.time.wait(500)
