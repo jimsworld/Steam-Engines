@@ -1,4 +1,5 @@
 # Steam Engines v0.02
+# Steam Engines v0.02
 
 import pygame
 import random
@@ -10,6 +11,7 @@ from loco_steam import Loco_Steam
 global_time = GlobalTime()
 
 
+# Menu function
 # Menu function
 show_menu = True
 def show_menu():
