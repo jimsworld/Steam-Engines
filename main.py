@@ -1,5 +1,4 @@
 # Steam Engines v0.02
-# Steam Engines v0.02
 
 import pygame
 import random
@@ -11,7 +10,6 @@ from loco_steam import Loco_Steam
 global_time = GlobalTime()
 
 
-# Menu function
 # Menu function
 show_menu = True
 def show_menu():
@@ -35,9 +33,10 @@ def start_menu():
 
     loco_list = [loco_01]
 
-    print("Select a locomotive:")
+    print("\n--- Start Menu"
+          "\nSteam Locomotive List:")
     for i, loco in enumerate(loco_list):
-        print(f"{i}: {loco.name}")
+        print(f"\n{i}: {loco.name}")
 
     selected_index = -1
     while selected_index < 0 or selected_index >= len(loco_list):
