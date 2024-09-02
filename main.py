@@ -1,4 +1,4 @@
-# Steam Engines v0.02
+# Steam Engines v0.03
 
 import pygame
 import random
@@ -8,6 +8,10 @@ from loco_steam import Loco_Steam
 
 # Initialize global time
 global_time = GlobalTime()
+
+# Locomotive list
+loco_01 = Loco_Steam("Talyllyn", 0, 10, 10, 10, 0, 10, 10, 10)
+loco_list = [loco_01]
 
 
 # Menu function
@@ -29,10 +33,7 @@ def show_menu():
 
 # Start menu to select a locomotive
 def start_menu():
-    loco_01 = Loco_Steam("Talyllyn", 0, 10, 0, 0, 0, 10, 10, 10)
-
-    loco_list = [loco_01]
-
+    
     print("\n--- Start Menu"
           "\nSteam Locomotive List:")
     for i, loco in enumerate(loco_list):
@@ -52,15 +53,16 @@ def start_menu():
     return chosen_loco
 
 
+#  Test the steam locomotive
+def test_loco():
+    while True:
+        loco_01.start_engine()
+        loco_01.make_steam()
+        loco_01.accelerate()
+        print(loco_01.get_speed())
+        pygame.time.wait(500)
+
+
 start_menu()
 show_menu()
-
-
-
-
-# #  Test the steam locomotive
-# loco_01.start_engine()
-# loco_01.make_steam()
-# loco_01.accelerate()
-# print(loco_01.get_speed())
-# pygame.time.wait(500)
+test_loco()
