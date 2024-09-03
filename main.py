@@ -1,4 +1,4 @@
-# Steam Engines v0.03
+# Steam Engines v0.04
 
 import pygame
 import random
@@ -13,8 +13,43 @@ global_time = GlobalTime()
 loco_01 = Loco_Steam("Talyllyn", 0, 10, 10, 10, 0, 10, 10, 10)
 loco_list = [loco_01]
 
+# Start menu to select a locomotive
+def start_menu(loco_list):
+    
+    print("\n--- Start Menu"
+          "\nSteam Locomotive List:")
+    for i, loco in enumerate(loco_list):
+        print(f"\n{i}: {loco.name}")
 
-# Menu function
+    selected_index = -1
+    while selected_index < 0 or selected_index >= len(loco_list):
+        try:
+            selected_index = int(input("\nEnter the number of the desired locomotive: "))
+            if selected_index < 0 or selected_index >= len(loco_list):
+                print("No loco with that number. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+    chosen_loco = loco_list[selected_index]
+    print(f"\nYou have chosen: {chosen_loco.name}")
+    return chosen_loco
+
+
+# Stat menu to display the locomotive stats
+def stat_menu(chosen_loco):
+    user_input = input("Would you like to view the stats of the locomotive? (y/n): ")
+    if user_input.lower() == "y":
+        print(f"\n--- {chosen_loco.name} Stats ---"
+              f"\nTop Speed: {chosen_loco.top_speed}"
+              f"\nCoal: {chosen_loco.max_coal}"
+              f"\nWater: {chosen_loco.max_water}"
+              f"\nSteam: {chosen_loco.max_steam}")
+    
+    elif user_input.lower() == "n":
+        print("No stats will be displayed, let's continue.")
+
+
+# Input menu shows commands
 show_menu = True
 def show_menu():
     global show_menu
@@ -31,38 +66,22 @@ def show_menu():
     show_menu = False
 
 
-# Start menu to select a locomotive
-def start_menu():
-    
-    print("\n--- Start Menu"
-          "\nSteam Locomotive List:")
-    for i, loco in enumerate(loco_list):
-        print(f"\n{i}: {loco.name}")
-
-    selected_index = -1
-    while selected_index < 0 or selected_index >= len(loco_list):
-        try:
-            selected_index = int(input("\nEnter the number of the desired locomotive: "))
-            if selected_index < 0 or selected_index >= len(loco_list):
-                print("Invalid selection. Please try again.")
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-
-    chosen_loco = loco_list[selected_index]
-    print(f"\nYou have chosen: {chosen_loco.name}")
-    return chosen_loco
-
-
 #  Test the steam locomotive
-def test_loco():
+def test_loco(chosen_loco):
     while True:
-        loco_01.start_engine()
-        loco_01.make_steam()
-        loco_01.accelerate()
-        print(loco_01.get_speed())
+        chosen_loco.start_engine()
+        chosen_loco.make_steam()
+        chosen_loco.accelerate()
+        print(chosen_loco.get_speed())
         pygame.time.wait(500)
 
 
-start_menu()
-show_menu()
-test_loco()
+# Main
+def main():
+    chosen_loco = start_menu(loco_list)
+    stat_menu(chosen_loco)
+    show_menu()
+    test_loco(chosen_loco)
+
+
+main()
