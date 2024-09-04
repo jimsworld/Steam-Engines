@@ -10,8 +10,8 @@ from loco_steam import Loco_Steam
 global_time = GlobalTime()
 
 # Locomotive list
-loco_01 = Loco_Steam("Talyllyn", 0, 10, 10, 10, 0, 10, 10, 10)
-loco_02 = Loco_Steam("Dolgoch", 0, 12, 8, 10, 0, 8, 10, 12)
+loco_01 = Loco_Steam("Talyllyn", 10, 10, 0, 0, 10, 10, 10, 10)
+loco_02 = Loco_Steam("Dolgoch", 8, 10, 0, 0, 8, 10, 10, 12)
 loco_list = [loco_01, loco_02]
 
 # Start menu to select a locomotive
@@ -73,7 +73,7 @@ def test_loco(chosen_loco):
         chosen_loco.start_engine()
         chosen_loco.make_steam()
         chosen_loco.accelerate()
-        print(chosen_loco.get_speed())
+        print(chosen_loco.get_speed(), chosen_loco.get_resources())
         pygame.time.wait(500)
 
 
@@ -86,3 +86,7 @@ def main():
 
 
 main()
+
+
+# Make loco_01 selectable as 1 instead of 0, loco_02 as 2 instead of 1, etc.
+# Deplete steam when accelerating.

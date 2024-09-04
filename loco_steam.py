@@ -4,29 +4,55 @@ from global_time import GlobalTime
 global_time = GlobalTime()
 
 class Loco_Steam:
-    def __init__(self, name, current_speed, max_speed, current_coal, current_water, current_steam, max_coal, max_water, max_steam):
+    def __init__(self, name, current_coal, current_water, current_steam, current_speed, max_coal, max_water, max_steam, max_speed):
         self.on = False
-        self.name = name
-        self.current_speed = current_speed
-        self.max_speed = max_speed
-        self.current_coal = current_coal
-        self.current_water = current_water
-        self.current_steam = current_steam
+        self.name = name      
+        self._current_coal = current_coal
+        self._current_water = current_water
+        self._current_steam = current_steam
+        self._current_speed = current_speed
         self.max_coal = max_coal
         self.max_water = max_water
         self.max_steam = max_steam
+        self.max_speed = max_speed
+
+    @property
+    def current_coal(self):
+        return self._current_coal
+    
+    @current_coal.setter
+    def current_coal(self, value):
+        self._current_coal = max(0, value)
+
+    @property
+    def current_water(self):
+        return self._current_water
+    
+    @current_water.setter
+    def current_water(self, value):
+        self._current_water = max(0, value)
+    
+    @property
+    def current_steam(self):
+        return self._current_steam
+    
+    @current_steam.setter
+    def current_steam(self, value):
+        self._current_steam = max(0, value)
+    
+    @property
+    def current_speed(self):
+        return self._current_speed
+    
+    @current_speed.setter
+    def current_speed(self, value):
+        self._current_speed = max(0, value)
 
     def start_engine(self):
         self.on = True
 
     def stop_engine(self):
         self.on = False
-
-    def enforce_non_negative(self):
-        self.current_speed = max(0, self.current_speed)
-        self.current_coal = max(0, self.current_coal)
-        self.current_water = max(0, self.current_water)
-        self.current_steam = max(0, self.current_steam)
 
     def add_water(self, amount):
         self.current_water += amount
@@ -43,22 +69,21 @@ class Loco_Steam:
             self.current_coal -= 1
             self.current_water -= 1
             self.current_steam += 1
-            self.enforce_non_negative()
             if self.current_steam > self.max_steam:
                 self.current_steam = self.max_steam
     
     def accelerate(self):
         if self.on and self.current_steam > 0:
-            self.current_speed += 1
             self.current_steam -= 1
-            self.enforce_non_negative()
+            self.current_speed += 1
             if self.current_speed > self.max_speed:
                 self.current_speed = self.max_speed
+        else:
+            self.current_speed -= 1
     
     def brake(self):
         if self.current_speed > 0:
             self.current_speed -= 1
-            self.enforce_non_negative()
     
     def get_speed(self):
         return self.current_speed
