@@ -19,26 +19,26 @@ def start_menu(loco_list):
     
     print("\n--- Start Menu"
           "\nSteam Locomotive List:")
-    for i, loco in enumerate(loco_list):
+    for i, loco in enumerate(loco_list, start=1):
         print(f"\n{i}: {loco.name}")
 
     selected_index = -1
-    while selected_index < 0 or selected_index >= len(loco_list):
+    while selected_index < 1 or selected_index > len(loco_list):
         try:
             selected_index = int(input("\nEnter the number of the desired locomotive: "))
-            if selected_index < 0 or selected_index >= len(loco_list):
+            if selected_index < 1 or selected_index > len(loco_list):
                 print("No loco with that number. Please try again.")
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-    chosen_loco = loco_list[selected_index]
+    chosen_loco = loco_list[selected_index - 1]
     print(f"\nYou have chosen: {chosen_loco.name}")
     return chosen_loco
 
 
 # Stat menu to display the locomotive stats
 def stat_menu(chosen_loco):
-    user_input = input("Would you like to view the stats of the locomotive? (y/n): ")
+    user_input = input(f"\nWould you like to view the stats of the locomotive? (y/n): ")
     if user_input.lower() == "y":
         print(f"\n--- {chosen_loco.name} Stats ---"
               f"\nTop Speed: {chosen_loco.max_speed}"
