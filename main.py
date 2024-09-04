@@ -11,7 +11,8 @@ global_time = GlobalTime()
 
 # Locomotive list
 loco_01 = Loco_Steam("Talyllyn", 0, 10, 10, 10, 0, 10, 10, 10)
-loco_list = [loco_01]
+loco_02 = Loco_Steam("Dolgoch", 0, 12, 8, 10, 0, 8, 10, 12)
+loco_list = [loco_01, loco_02]
 
 # Start menu to select a locomotive
 def start_menu(loco_list):
@@ -40,7 +41,7 @@ def stat_menu(chosen_loco):
     user_input = input("Would you like to view the stats of the locomotive? (y/n): ")
     if user_input.lower() == "y":
         print(f"\n--- {chosen_loco.name} Stats ---"
-              f"\nTop Speed: {chosen_loco.top_speed}"
+              f"\nTop Speed: {chosen_loco.max_speed}"
               f"\nCoal: {chosen_loco.max_coal}"
               f"\nWater: {chosen_loco.max_water}"
               f"\nSteam: {chosen_loco.max_steam}")
