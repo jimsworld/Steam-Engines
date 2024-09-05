@@ -1,5 +1,3 @@
-# Steam Engines v0.04
-
 import pygame
 import random
 import math
@@ -10,8 +8,8 @@ from loco_steam import Loco_Steam
 global_time = GlobalTime()
 
 # Locomotive list
-loco_01 = Loco_Steam("Talyllyn", 10, 10, 0, 0, 10, 10, 10, 10)
-loco_02 = Loco_Steam("Dolgoch", 8, 10, 0, 0, 8, 10, 10, 12)
+loco_01 = Loco_Steam("Talyllyn", 0, 0, 0, 0, 10, 10, 10, 10)
+loco_02 = Loco_Steam("Dolgoch", 0, 0, 0, 0, 8, 10, 10, 12)
 loco_list = [loco_01, loco_02]
 
 # Start menu to select a locomotive
@@ -38,16 +36,60 @@ def start_menu(loco_list):
 
 # Stat menu to display the locomotive stats
 def stat_menu(chosen_loco):
-    user_input = input(f"\nWould you like to view the stats of the locomotive? (y/n): ")
-    if user_input.lower() == "y":
-        print(f"\n--- {chosen_loco.name} Stats ---"
-              f"\nTop Speed: {chosen_loco.max_speed}"
-              f"\nCoal: {chosen_loco.max_coal}"
-              f"\nWater: {chosen_loco.max_water}"
-              f"\nSteam: {chosen_loco.max_steam}")
+    print(f"\n--- {chosen_loco.name} Stats ---"
+            f"\nMax Coal: {chosen_loco.max_coal}"
+            f"\nMax Water: {chosen_loco.max_water}"
+            f"\nMax Steam: {chosen_loco.max_steam}"
+            f"\nMax Speed: {chosen_loco.max_speed}")
+
+
+# Start the game
+def start_game(chosen_loco):
+    print("\nLet's get ready..."
+            "\nWhat would you like to do?\n"
+            "\n'1': Prepare your locomotive"
+            "\n'2': View your locomotive stats"
+            "\n'3': View Station Map"
+            "\n'help': Show commands")
+
+    start_game_choice = input("\nChoose: ")
+    match start_game_choice:
+
+        case "1":
+            add_coal = input("\nAdd some coal?"
+                                "\n'1': Full coal"
+                                "\n'2': Choose amount"
+                                "\n'3': Skip"
+                                "\nChoose: ")
+            match add_coal:
+                case "1":
+                    chosen_loco.current_coal = chosen_loco.max_coal
+                    print("Full coal added.")
+                case "2":
+                    coal_amount = int(input("Enter the amount of coal to add: "))
+                    chosen_loco.current_coal += coal_amount
+                    print(f"{coal_amount} coal added.")
+                case "3":
+                    print("No coal added.")
+            
+            add_water = input("\nAdd some water?"
+                                "\n'1': Full water"
+                                "\n'2': Choose amount"
+                                "\n'3': Skip"
+                                "\nChoose: ")
+            match add_water:
+                case "1":
+                    chosen_loco.current_water = chosen_loco.max_water
+                    print("Full water added.")
+                case "2":
+                    water_amount = int(input("Enter the amount of water to add: "))
+                    chosen_loco.current_water += water_amount
+                    print(f"{water_amount} water added.")
+                case "3":
+                    print("No water added.")
     
-    elif user_input.lower() == "n":
-        print("No stats will be displayed, let's continue.")
+        case "2":
+            stat_menu(chosen_loco)
 
 
 # Input menu shows commands
@@ -58,8 +100,8 @@ def show_menu():
           "\n'help':       shows this menu"
           "\n'start':      start engine"
           "\n'stop':       stop engine"
-          "\n'1':          add water"
-          "\n'2':          add coal"
+          "\n'1':          add add"
+          "\n'2':          add water"
           "\n'3':          make steam"
           "\n'4':          accelerate"
           "\n'5':          brake"
@@ -72,7 +114,6 @@ def test_loco(chosen_loco):
     while True:
         chosen_loco.start_engine()
         chosen_loco.make_steam()
-        chosen_loco.accelerate()
         print(chosen_loco.get_speed(), chosen_loco.get_resources())
         pygame.time.wait(500)
 
@@ -80,13 +121,12 @@ def test_loco(chosen_loco):
 # Main
 def main():
     chosen_loco = start_menu(loco_list)
+
     stat_menu(chosen_loco)
-    show_menu()
+
+    start_game(chosen_loco)
+
     test_loco(chosen_loco)
 
 
 main()
-
-
-# Make loco_01 selectable as 1 instead of 0, loco_02 as 2 instead of 1, etc.
-# Deplete steam when accelerating.
