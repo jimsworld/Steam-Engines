@@ -52,50 +52,58 @@ def start_game(chosen_loco):
             "\n'3': View Station Map"
             "\n'help': Show commands")
 
-    start_game_choice = input("\nChoose: ")
+    start_game_choice = input("\n> ")
     match start_game_choice:
 
         case "1":
-            add_coal = input("\nAdd some coal?"
-                                "\n'1': Full coal"
+            add_coal = input("\nAdd some Coal?"
+                                "\n'1': Full Coal"
                                 "\n'2': Choose amount"
-                                "\n'3': Skip"
-                                "\nChoose: ")
+                                "\n'3': Skip\n"
+                                "\n> ")
             match add_coal:
                 case "1":
                     chosen_loco.current_coal = chosen_loco.max_coal
-                    print("Full coal added.")
+                    print("Full Coal added.")
                 case "2":
                     coal_amount = int(input("Enter the amount of coal to add: "))
                     chosen_loco.current_coal += coal_amount
-                    print(f"{coal_amount} coal added.")
                 case "3":
-                    print("No coal added.")
+                    print("No Coal added.")
             
-            add_water = input("\nAdd some water?"
-                                "\n'1': Full water"
+            print(f"{chosen_loco.current_coal} / {chosen_loco.max_coal} Coal added")
+            
+            add_water = input("\nAdd some Water?"
+                                "\n'1': Full Water"
                                 "\n'2': Choose amount"
-                                "\n'3': Skip"
-                                "\nChoose: ")
+                                "\n'3': Skip\n"
+                                "\n> ")
             match add_water:
                 case "1":
                     chosen_loco.current_water = chosen_loco.max_water
-                    print("Full water added.")
+                    print("Full Water added.")
                 case "2":
-                    water_amount = int(input("Enter the amount of water to add: "))
+                    water_amount = int(input("Enter the amount of Water to add: "))
                     chosen_loco.current_water += water_amount
-                    print(f"{water_amount} water added.")
                 case "3":
-                    print("No water added.")
+                    print("No Water added.")
+            
+            print(f"{chosen_loco.current_water} / {chosen_loco.max_water} Water added")
     
         case "2":
             stat_menu(chosen_loco)
+        
+        case "3":
+            print("Feature coming soon.")
+
+        case "help":
+            show_menu()
+    
+    start_game_choice = input("\nAnything else?: ")
 
 
 # Input menu shows commands
-show_menu = True
 def show_menu():
-    global show_menu
     print("\nEnter command:"
           "\n'help':       shows this menu"
           "\n'start':      start engine"
@@ -106,7 +114,6 @@ def show_menu():
           "\n'4':          accelerate"
           "\n'5':          brake"
           "\n'quit':       exits.")
-    show_menu = False
 
 
 #  Test the steam locomotive
@@ -118,7 +125,7 @@ def test_loco(chosen_loco):
         pygame.time.wait(500)
 
 
-# Main
+# Main loop
 def main():
     chosen_loco = start_menu(loco_list)
 
