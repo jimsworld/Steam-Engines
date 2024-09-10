@@ -3,6 +3,7 @@ import random
 import math
 from global_time import GlobalTime
 from loco_steam import Loco_Steam
+from stations import Stations
 
 # Initialize global time
 global_time = GlobalTime()
@@ -11,6 +12,10 @@ global_time = GlobalTime()
 loco_01 = Loco_Steam("Talyllyn", 0, 0, 0, 0, 10, 10, 10, 10)
 loco_02 = Loco_Steam("Dolgoch", 0, 0, 0, 0, 8, 10, 10, 12)
 loco_list = [loco_01, loco_02]
+
+# Station list
+station_01 = Stations("Tywyn Wharf", 0)
+station_02 = Stations("Pendre", 5)
 
 # Start menu to select a locomotive
 def loco_menu(loco_list):
@@ -36,7 +41,7 @@ def loco_menu(loco_list):
 
 # Prepare the locomotive with coal and water
 def prepare_loco(chosen_loco):
-    add_coal = input("\nAdd some Coal?"
+    add_coal = input("\nAdd Coal?"
                         "\n'1': Full Coal"
                         "\n'2': Choose amount"
                         "\n'3': Skip\n"
@@ -52,7 +57,7 @@ def prepare_loco(chosen_loco):
             print("No Coal added.")
     print(f"{chosen_loco.current_coal} / {chosen_loco.max_coal} Coal added")
     
-    add_water = input("\nAdd some Water?"
+    add_water = input("\nAdd Water?"
                         "\n'1': Full Water"
                         "\n'2': Choose amount"
                         "\n'3': Skip\n"
@@ -71,7 +76,7 @@ def prepare_loco(chosen_loco):
 
 # Stat menu to display the locomotive stats
 def stat_menu(chosen_loco):
-    print(f"\n--- {chosen_loco.name} Stats ---"
+    print(f"\n--- {chosen_loco.name} Stats ---\n"
             f"\nMax Coal: {chosen_loco.max_coal}"
             f"\nMax Water: {chosen_loco.max_water}"
             f"\nMax Steam: {chosen_loco.max_steam}"
@@ -99,8 +104,8 @@ def start_game(chosen_loco):
             "\n'1': Prepare your locomotive"
             "\n'2': View your locomotive stats"
             "\n'3': View Station Map"
-            "\n'help': Show commands"
-            "\n'0': Confirm and Start")
+            "\n'0': Confirm and Start"
+            "\n'help': Show commands")
 
     def start_menu(chosen_loco):
         while True:

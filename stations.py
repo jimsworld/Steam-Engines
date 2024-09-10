@@ -1,16 +1,21 @@
+import random
+
 class Stations:
-    def __init__ (self, name, distance, passengers, refuel_coal, refuel_water):
+    def __init__ (self, name, distance):
         self.name = name
         self.distance = distance
-        self.passengers = passengers
-        self.refuel_coal = refuel_coal
-        self.refuel_water = refuel_water
+        self.passengers = random.randint(0, 30)
+        self.refuel_coal = random.randint(0, 10)
+        self.refuel_water = random.randint(0, 10)
     
     def get_distance(self):
         return self.distance
     
     def get_passengers(self):
         return self.passengers
+    
+    def get_current_station(self):
+        return self.name
     
 
 
@@ -24,8 +29,7 @@ class Stations:
 
 # Create stations (as seperate class in different file) and add the ability to stop at stations.
 # They should all be at different distances and reaching them depends on current coal/water/steam levels.
-# Stations should have a name.
-# The distance should be a set number of miles away from the starting point.
+# The distance should be a set number of miles away from the starting station.
 # The player should be able to stop at a station and refuel coal and water.
 # The player should be able to see the distance to the next station.
 # The player should be able to see the total distance traveled.
