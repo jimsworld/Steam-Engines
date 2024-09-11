@@ -17,25 +17,26 @@ class Stations:
     def get_current_station(self):
         return self.name
     
+    def distance_to_next_station(self, next_station):
+        return abs(self.distance - next_station.get_distance())
+
 
 # Station list
 station_01 = Stations("Tywyn Wharf", 0)
-station_02 = Stations("Pendre", 5)
-station_list = [station_01, station_02]
+station_02 = Stations("Pendre", 0.42)
+station_03 = Stations("Rhydyronen", 2.15)
+station_04 = Stations("Brynglas", 3.18)
+station_05 = Stations("Dolgoch", 4.90)
+station_06 = Stations("Abergynolwyn", 6.57)
+station_07 = Stations("Nant Gwernol", 7.25)
+station_list = [station_01, station_02, station_03, station_04, station_05, station_06, station_07]
 
 
 
-# create current_station and next_station
 # add in the method from current_station to next_station
 
-
-
-
-
-
-# Create stations (as seperate class in different file) and add the ability to stop at stations.
-# They should all be at different distances and reaching them depends on current coal/water/steam levels.
-# The distance should be a set number of miles away from the starting station.
+# Create the ability to stop at stations.
+# Reaching them depends on current coal/water/steam levels and the distance to the next station.
 # The player should be able to stop at a station and refuel coal and water.
 # The player should be able to see the distance to the next station.
 # The player should be able to see the total distance traveled.

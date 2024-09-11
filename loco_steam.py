@@ -4,9 +4,10 @@ from global_time import GlobalTime
 global_time = GlobalTime()
 
 class Loco_Steam:
-    def __init__(self, name, current_coal, current_water, current_steam, current_speed, max_coal, max_water, max_steam, max_speed):
+    def __init__(self, name, position, current_coal, current_water, current_steam, current_speed, max_coal, max_water, max_steam, max_speed):
         self.on = False
-        self.name = name      
+        self.name = name   
+        self.position = position   
         self._current_coal = current_coal
         self._current_water = current_water
         self._current_steam = current_steam
@@ -93,6 +94,7 @@ class Loco_Steam:
 
 
 # Locomotive list
-loco_01 = Loco_Steam("Talyllyn", 0, 0, 0, 0, 10, 10, 10, 10)
-loco_02 = Loco_Steam("Dolgoch", 0, 0, 0, 0, 8, 10, 10, 12)
+loco_01 = Loco_Steam("Talyllyn", 0, 0, 0, 0, 0, 10, 10, 10, 10)
+loco_02 = Loco_Steam("Dolgoch", 0, 0, 0, 0, 0, 8, 10, 10, 12)
+loco_03 = Loco_Steam("Sir Haydn", 0, 0, 0, 0, 0, 12, 8, 14, 12)
 loco_list = [loco_01, loco_02]
