@@ -125,7 +125,7 @@ def test_loco(chosen_loco):
     while True:
         chosen_loco.start_engine()
         chosen_loco.make_steam()
-        print(chosen_loco.get_speed(), chosen_loco.get_resources())
+        print(chosen_loco.current_speed, chosen_loco.get_resources())
         pygame.time.wait(500)
 
 

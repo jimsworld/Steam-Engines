@@ -6,8 +6,8 @@ global_time = GlobalTime()
 class Loco_Steam:
     def __init__(self, name, position, current_coal, current_water, current_steam, current_speed, max_coal, max_water, max_steam, max_speed):
         self.on = False
-        self.name = name   
-        self.position = position   
+        self.name = name
+        self._position = position
         self._current_coal = current_coal
         self._current_water = current_water
         self._current_steam = current_steam
@@ -16,6 +16,14 @@ class Loco_Steam:
         self.max_water = max_water
         self.max_steam = max_steam
         self.max_speed = max_speed
+
+    @property
+    def position(self):
+        return self._position
+    
+    @position.setter
+    def position(self, value):
+        self._position = max(0, value)
 
     @property
     def current_coal(self):
@@ -86,9 +94,6 @@ class Loco_Steam:
         if self.current_speed > 0:
             self.current_speed -= 1
     
-    def get_speed(self):
-        return self.current_speed
-    
     def get_resources(self):
         return self.current_coal, self.current_water, self.current_steam
 
@@ -97,4 +102,4 @@ class Loco_Steam:
 loco_01 = Loco_Steam("Talyllyn", 0, 0, 0, 0, 0, 10, 10, 10, 10)
 loco_02 = Loco_Steam("Dolgoch", 0, 0, 0, 0, 0, 8, 10, 10, 12)
 loco_03 = Loco_Steam("Sir Haydn", 0, 0, 0, 0, 0, 12, 8, 14, 12)
-loco_list = [loco_01, loco_02]
+loco_list = [loco_01, loco_02, loco_03]
