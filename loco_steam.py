@@ -90,3 +90,9 @@ class Loco_Steam:
     
     def get_resources(self):
         return self.current_coal, self.current_water, self.current_steam
+
+
+# Locomotive list
+loco_01 = Loco_Steam("Talyllyn", 0, 0, 0, 0, 10, 10, 10, 10)
+loco_02 = Loco_Steam("Dolgoch", 0, 0, 0, 0, 8, 10, 10, 12)
+loco_list = [loco_01, loco_02]

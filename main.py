@@ -2,20 +2,11 @@ import pygame
 import random
 import math
 from global_time import GlobalTime
-from loco_steam import Loco_Steam
-from stations import Stations
+from loco_steam import loco_list
+from stations import station_list
 
 # Initialize global time
 global_time = GlobalTime()
-
-# Locomotive list
-loco_01 = Loco_Steam("Talyllyn", 0, 0, 0, 0, 10, 10, 10, 10)
-loco_02 = Loco_Steam("Dolgoch", 0, 0, 0, 0, 8, 10, 10, 12)
-loco_list = [loco_01, loco_02]
-
-# Station list
-station_01 = Stations("Tywyn Wharf", 0)
-station_02 = Stations("Pendre", 5)
 
 # Start menu to select a locomotive
 def loco_menu(loco_list):

@@ -18,9 +18,15 @@ class Stations:
         return self.name
     
 
+# Station list
+station_01 = Stations("Tywyn Wharf", 0)
+station_02 = Stations("Pendre", 5)
+station_list = [station_01, station_02]
 
 
 
+# create current_station and next_station
+# add in the method from current_station to next_station
 
 
 
