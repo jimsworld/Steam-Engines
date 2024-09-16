@@ -85,7 +85,7 @@ def select_destination(station_list):
 
 
 def calculate_distance(start_position, end_position):
-    return abs(end_position[0] - start_position[0])  # there is an error here, fix it later
+    return abs(end_position - start_position)  # there is an error here, fix it later
 
 
 def move_locomotive(loco, destination_station):
