@@ -65,6 +65,43 @@ def prepare_loco(chosen_loco):
     print(f"{chosen_loco.current_water} / {chosen_loco.max_water} Water added")
 
 
+def select_destination(station_list):
+    print("\n--- Select Destination Station ---")
+    for i, station in enumerate(station_list, start=1):
+        print(f"\n{i}: {station.name}")
+    
+    selected_index = -1
+    while selected_index < 1 or selected_index > len(station_list):
+        try:
+            selected_index = int(input("\nEnter the number of the desired station: "))
+            if selected_index < 1 or selected_index > len(station_list):
+                print("No station with that number. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+    
+    chosen_station = station_list[selected_index - 1]
+    print(f"\nYou have chosen: {chosen_station.name}")
+    return chosen_station
+
+
+def calculate_distance(start_position, end_position):
+    return abs(end_position[0] - start_position[0])  # there is an error here, fix it later
+
+
+def move_locomotive(loco, destination_station):
+    distance = calculate_distance(loco.position, destination_station.distance)
+    print(f"\nMoving {loco.name} from {loco.position} to {destination_station.distance}")
+    print(f"Distance to travel: {distance} miles")
+
+    # while loco.position != destination_station.distance:
+    #     loco.position[0] += 1
+    #     print(f"Current position: {loco.position}")
+    #     pygame.time.wait(500)
+    
+    loco.position = destination_station.distance
+    print(f"{loco.name} has arrived at {destination_station.name}")
+
+
 # Stat menu to display the locomotive stats
 def stat_menu(chosen_loco):
     print(f"\n--- {chosen_loco.name} Stats ---\n"
@@ -135,7 +172,9 @@ def main():
 
     start_game(chosen_loco)
 
-    test_loco(chosen_loco)
+    destination_station = select_destination(station_list)
+
+    move_locomotive(chosen_loco, destination_station)
 
 
 main()
