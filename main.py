@@ -91,15 +91,28 @@ def calculate_distance(start_position, end_position):
 def move_locomotive(loco, destination_station):
     distance = calculate_distance(loco.position, destination_station.distance)
     print(f"\nMoving {loco.name} from {loco.position} to {destination_station.distance}")
-    print(f"Distance to travel: {distance} miles")
+    print(f"\nDistance to travel: {distance} miles")
 
-    # while loco.position != destination_station.distance:
-    #     loco.position[0] += 1
-    #     print(f"Current position: {loco.position}")
-    #     pygame.time.wait(500)
-    
-    loco.position = destination_station.distance
-    print(f"{loco.name} has arrived at {destination_station.name}")
+    while loco.position < destination_station.distance:
+        if loco.current_coal > 0 and loco.current_water > 0:
+            loco.start_engine()
+            loco.make_steam()
+            if loco.current_steam >= loco.max_steam:
+                loco.accelerate()
+                loco.position += 1  # Move 1 mile at a time
+                loco.current_steam -= loco.max_steam  # Consume steam
+                print(f"Speed: {loco.current_speed}, {loco.get_resources()}, Position: {loco.position}")
+                pygame.time.wait(500)  # Simulate time delay
+            else:
+                print("Generating steam...")
+                pygame.time.wait(500)  # Simulate time delay for steam generation
+        else:
+            print("Out of resources! The locomotive cannot move further.")
+            break
+
+    if loco.position >= destination_station.distance:
+        loco.position = destination_station.distance
+        print(f"\n{loco.name} has arrived at {destination_station.name}")
 
 
 # Stat menu to display the locomotive stats
