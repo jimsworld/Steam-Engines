@@ -94,17 +94,16 @@ def move_locomotive(loco, destination_station):
     print(f"\nDistance to travel: {distance} miles")
 
     while loco.position < destination_station.distance:
+        loco.start_engine()
         if loco.current_coal > 0 and loco.current_water > 0:
-            loco.start_engine()
             loco.make_steam()
             if loco.current_steam >= loco.max_steam:
                 loco.accelerate()
-                loco.position += 1  # Move 1 mile at a time
-                loco.current_steam -= loco.max_steam  # Consume steam
+                loco.position += 0.1  # Move 1 mile at a time
                 print(f"Speed: {loco.current_speed}, {loco.get_resources()}, Position: {loco.position}")
                 pygame.time.wait(500)  # Simulate time delay
             else:
-                print("Generating steam...")
+                print(f"Generating steam... ({loco.current_steam})")
                 pygame.time.wait(500)  # Simulate time delay for steam generation
         else:
             print("Out of resources! The locomotive cannot move further.")
